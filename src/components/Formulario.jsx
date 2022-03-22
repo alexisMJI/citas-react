@@ -28,6 +28,10 @@ const Formulario = () => {
                     <label htmlFor="observa" className="block text-gray-700 uppercase font-bold">Observaciones</label>
                     <input id="observa" type="text" placeholder="Puede introducir aqui las observaciones" className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"/>
                 </div>
+                <div className="mb-5">
+                    <label htmlFor="observa" className="block text-gray-700 uppercase font-bold">Observaciones</label>
+                    <input id="observa" type="text" placeholder="Puede introducir aqui las observaciones" className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"/>
+                </div>
 
                 <input type="submit" className="bg-indigo-600 font-bold w-full p-5 text-white uppercase hover:bg-indigo-700 cursor-pointer" value="Agregar Paciente"/>
             </form>
