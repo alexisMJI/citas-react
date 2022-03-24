@@ -1,7 +1,7 @@
 import Paciente from "./Paciente"
 
 
-export default function ListadoPacientes() {
+export default function ListadoPacientes({Pacientes}) {
 
   return (
 
@@ -13,10 +13,7 @@ export default function ListadoPacientes() {
         </p>
 
         <Paciente />
-        <Paciente />
-        <Paciente />
-        <Paciente  />
-        <Paciente  />
+        
        
     </div>
   )
