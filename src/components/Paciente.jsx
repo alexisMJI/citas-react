@@ -1,30 +1,34 @@
 
-const Paciente = () => {
+const Paciente = ({paciente}) => {
+
+  //con esto nos evitamos poner paciente.pirulito en cada span
+  const {nombreM,nombreP,email,fecha,obser} = paciente;
+
   return (
     <div  className="mx-5 my-5 bg-white shadow-md px-5 py-5 rounded-md">
       <p className=" font-bold mb-3 text-gray-700 uppercase">
         Nombre de Mascota:
-        <span className="font-normal normal-case"> Hook</span>
+        <span className="font-normal normal-case"> {nombreM}</span>
       </p>
 
       <p className=" font-bold mb-3 text-gray-700 uppercase">
         Nombre del propietario:
-        <span className="font-normal normal-case"> Juan</span>
+        <span className="font-normal normal-case"> {nombreP}</span>
       </p>
 
       <p className=" font-bold mb-3 text-gray-700 uppercase">
         E-Mail:
-        <span className="font-normal normal-case"> correoejemplo@dominio.com</span>
+        <span className="font-normal normal-case"> {email}</span>
       </p>
 
       <p className=" font-bold mb-3 text-gray-700 uppercase">
         Fecha del Alta:
-        <span className="font-normal normal-case"> 21 de Marzo de 2022</span>
+        <span className="font-normal normal-case"> {fecha}</span>
       </p>
 
       <p className=" font-bold mb-3 text-gray-700 uppercase">
         Observaciones:
-        <span className="font-normal normal-case"> Lorem ipsum doi fugiat, inventore a maiores eius sint exp iendis mollitia vel dolor, neque aut odit alias!</span>
+        <span className="font-normal normal-case"> {obser}</span>
       </p>
   </div>
   )

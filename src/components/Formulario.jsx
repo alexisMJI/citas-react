@@ -7,8 +7,16 @@ const Formulario = ({pacientes,setPacientes}) => {
     const [email, setEmail] = useState('');
     const [fecha, setFecha] = useState('');
     const [obser, setObser] = useState('');
-    
+    const generarId = () => {
+        const random = Math.random().toString(36).substr(2);
+        const fecha = Date.now().toString(36)
+        return random + fecha
+    }
+
     const [error, setError] = useState(false);
+
+    
+    //FUNCION MANEJADOR DE SUBMIT
     const handleSubmit = (e) => {
         //Evitamnos que nos recarge la pag    
         e.preventDefault();
@@ -25,7 +33,8 @@ const Formulario = ({pacientes,setPacientes}) => {
                 nombreP,
                 email,
                 fecha,
-                obser
+                obser,
+                id: generarId()
             }
             
             //Capturamos los datos de obCliente y lo grabamos en pacientes asi no se sobreescriben
@@ -36,6 +45,8 @@ const Formulario = ({pacientes,setPacientes}) => {
             setEmail('')
             setFecha('')
             setObser('')
+            
+            console.log("Se realizo el alta");
         }
     }
    
@@ -55,7 +66,7 @@ const Formulario = ({pacientes,setPacientes}) => {
                 onSubmit={handleSubmit} 
                 className="bg-white shadow-md rounded-lg py-5 px-5 mt-5 mb-10"
             >    
-             { error && <Error>
+            {error && <Error>
                         <p>Todos los campos son obligatorios</p>
                         </Error> 
                         
