@@ -1,12 +1,18 @@
+//importamos el componente Paciente
 import Paciente from "./Paciente"
 
 
-export default function ListadoPacientes({pacientes}) {
+
+
+export default function ListadoPacientes({pacientes, setPaciente}) {
+  
+  
+ 
 
   return (
 
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
-
+      {/* SI state 'pacientes' esta cargado mostrarlo sino no*/}
       {pacientes && pacientes.length ?(
         <>
             <h2 className="font-black text-3xl text-center">Listado Pacientes</h2>
@@ -16,14 +22,17 @@ export default function ListadoPacientes({pacientes}) {
             </p>
     
             
-            {/* Interamos los datos de pacientes */}
-            {pacientes.map(paciente => (
+            {/* Con la funcion .MAP recorremos el array pacientes, pacient = i*/}
+            {pacientes.map(pacient => (
                 
                 <Paciente
-                  key={paciente.id}
-                  paciente={paciente} 
+                  key={pacient.id}
+                  pacient={pacient} 
+                  setPaciente={setPaciente}
                 /> 
-                      
+                
+                
+                
             ))}
         </>
 

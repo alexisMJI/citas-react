@@ -1,21 +1,37 @@
 import { useState, useEffect } from 'react';
 import Error from "./Error";
 
-const Formulario = ({pacientes,setPacientes}) => {
+const Formulario = ({pacientes,setPacientes, paciente}) => {
+    //NUESTROS STATES que usan el hook useState
     const [nombreM, setNombreM] = useState('');
     const [nombreP, setNombreP] = useState('');
     const [email, setEmail] = useState('');
     const [fecha, setFecha] = useState('');
     const [obser, setObser] = useState('');
+    const [error, setError] = useState(false);
+    //funcion para generar id
     const generarId = () => {
         const random = Math.random().toString(36).substr(2);
         const fecha = Date.now().toString(36)
         return random + fecha
     }
 
-    const [error, setError] = useState(false);
+    useEffect(() => {
+        //SI el objeto paciente esta cargado hace esto
+        if( Object.keys(paciente).length > 0){
+            
+            var {nombreM,nombreP,email,fecha,obser} = paciente;
 
+
+            setNombreM(nombreM)
+            setNombreP(nombreP)
+            setEmail(email)
+            setFecha(fecha)
+            setObser(obser)
+        }
+      }, [paciente]);
     
+        
     //FUNCION MANEJADOR DE SUBMIT
     const handleSubmit = (e) => {
         //Evitamnos que nos recarge la pag    
@@ -39,7 +55,7 @@ const Formulario = ({pacientes,setPacientes}) => {
             
             //Capturamos los datos de obCliente y lo grabamos en pacientes asi no se sobreescriben
             setPacientes([...pacientes,obCliente]);
-            //Reiniciamos el Form
+            //Vaciamos el form
             setNombreM('')
             setNombreP('')
             setEmail('')
@@ -65,7 +81,9 @@ const Formulario = ({pacientes,setPacientes}) => {
                 id="formUser" 
                 onSubmit={handleSubmit} 
                 className="bg-white shadow-md rounded-lg py-5 px-5 mt-5 mb-10"
-            >    
+            > 
+
+            {/* Si el state 'error' es true llama al componente Error y le pasa una estiqueta p */}   
             {error && <Error>
                         <p>Todos los campos son obligatorios</p>
                         </Error> 
@@ -129,7 +147,7 @@ const Formulario = ({pacientes,setPacientes}) => {
                 <input 
                     type="submit" 
                     className="bg-indigo-600 font-bold w-full p-5 text-white uppercase hover:bg-indigo-700 cursor-pointer" 
-                    value="Agregar Paciente"
+                    value={paciente.id ? "Editar paciente" : "Agregar Paciente"}
                     
                 />
             </form>
