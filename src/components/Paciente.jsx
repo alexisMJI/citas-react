@@ -1,4 +1,3 @@
-
 const Paciente = ({pacient, setPaciente}) => {
 
   //con esto nos evitamos poner paciente.pirulito en cada span

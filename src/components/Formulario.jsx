@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Error from "./Error";
 
-const Formulario = ({pacientes,setPacientes, paciente}) => {
-    //NUESTROS STATES que usan el hook useState
+const Formulario = ({pacientes,setPacientes, paciente,setPaciente}) => {
+    //DEFINIMOS NUESTROS STATES que usan el hook useState
     const [nombreM, setNombreM] = useState('');
     const [nombreP, setNombreP] = useState('');
     const [email, setEmail] = useState('');
@@ -17,9 +17,9 @@ const Formulario = ({pacientes,setPacientes, paciente}) => {
     }
 
     useEffect(() => {
-        //SI el objeto paciente esta cargado hace esto
+        //Comprueba SI el objeto paciente cuenta con datos 
+        //Si estamos editando un paciente hacemos lo soguente
         if( Object.keys(paciente).length > 0){
-            
             var {nombreM,nombreP,email,fecha,obser} = paciente;
 
 
@@ -29,32 +29,47 @@ const Formulario = ({pacientes,setPacientes, paciente}) => {
             setFecha(fecha)
             setObser(obser)
         }
-      }, [paciente]);
+      }, [paciente]);//valor que revisara atento a cambios || en caso de estar vacio se ejecuta una vez el useEffect 
     
         
     //FUNCION MANEJADOR DE SUBMIT
     const handleSubmit = (e) => {
         //Evitamnos que nos recarge la pag    
         e.preventDefault();
-        //Validacion
+        //Validacion de Campos Vacios
         if([nombreM,nombreP,email,fecha,obser].includes('')){
             console.log("Hay al menos un campo vacio");
             setError(true); 
         } 
         else{ 
             setError(false);  
-            //Objeto de paciente
-            const obCliente={
+            //Creamos un objeto con los datos que tenemos del cliente
+            const obPaciente={
                 nombreM,
                 nombreP,
                 email,
                 fecha,
-                obser,
-                id: generarId()
+                obser             
+            }
+
+            if (paciente.id) {
+                //Editando Cliente
+                obPaciente.id = paciente.id
+                // vamos a recorrer la lista de clientes que tenemos y va a matchear por id, una vez que lo encuentre lo sobreescribe con el nuevo objeto sino lo deja como esta
+                const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? obPaciente : pacienteState)
+                //actualizamos la lista de cliente
+                setPacientes(pacientesActualizados)
+                //limpiamos el state de memoria
+                setPaciente= {}
+
+            } else {
+                //Nuevo Cliente
+                obPaciente.id = generarId()
+                //tomamos una copia del state y estamos agregando el nuevo objeto a la lista de pacientes
+                setPacientes([... pacientes,obPaciente]);
             }
             
-            //Capturamos los datos de obCliente y lo grabamos en pacientes asi no se sobreescriben
-            setPacientes([...pacientes,obCliente]);
+            
             //Vaciamos el form
             setNombreM('')
             setNombreP('')
@@ -62,7 +77,6 @@ const Formulario = ({pacientes,setPacientes, paciente}) => {
             setFecha('')
             setObser('')
             
-            console.log("Se realizo el alta");
         }
     }
    
