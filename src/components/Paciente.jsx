@@ -1,7 +1,14 @@
-const Paciente = ({pacient, setPaciente}) => {
+const Paciente = ({pacient, setPaciente,eliminarPaciente}) => {
 
   //con esto nos evitamos poner paciente.pirulito en cada span
-  const {nombreM,nombreP,email,fecha,obser} = pacient;
+  const {nombreM,nombreP,email,fecha,obser,id} = pacient;
+  const handleEliminar = () => {
+    const respuesta = confirm('deseas eliminar el paciente?');
+    
+    if(respuesta) {
+      eliminarPaciente(id)
+    }
+  }
 
   return (
     <div  className="mx-5 my-5 bg-white shadow-md px-5 py-5 rounded-md">
@@ -41,6 +48,7 @@ const Paciente = ({pacient, setPaciente}) => {
           type="button"
           className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold
           uppercase rounded-lg"
+          onClick={handleEliminar}
         >Eliminar</button>
 
       </div>

@@ -52,18 +52,18 @@ const Formulario = ({pacientes,setPacientes, paciente,setPaciente}) => {
                 obser             
             }
 
-            if (paciente.id) {
-                //Editando Cliente
+            if (paciente.id) {//Editando Cliente
+                
                 obPaciente.id = paciente.id
                 // vamos a recorrer la lista de clientes que tenemos y va a matchear por id, una vez que lo encuentre lo sobreescribe con el nuevo objeto sino lo deja como esta
                 const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? obPaciente : pacienteState)
                 //actualizamos la lista de cliente
                 setPacientes(pacientesActualizados)
                 //limpiamos el state de memoria
-                setPaciente= {}
+                setPaciente({})
 
-            } else {
-                //Nuevo Cliente
+            } else {//Nuevo Cliente
+                
                 obPaciente.id = generarId()
                 //tomamos una copia del state y estamos agregando el nuevo objeto a la lista de pacientes
                 setPacientes([... pacientes,obPaciente]);

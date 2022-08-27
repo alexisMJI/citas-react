@@ -1,7 +1,7 @@
 //importamos el componente Paciente
 import Paciente from "./Paciente"
 
-export default function ListadoPacientes({pacientes, setPaciente}) {
+export default function ListadoPacientes({pacientes, setPaciente, eliminarPaciente}) {
   
   return (
 
@@ -23,6 +23,7 @@ export default function ListadoPacientes({pacientes, setPaciente}) {
                   key={pacient.id}
                   pacient={pacient} 
                   setPaciente={setPaciente}
+                  eliminarPaciente={eliminarPaciente}
                 /> 
                 
                 
